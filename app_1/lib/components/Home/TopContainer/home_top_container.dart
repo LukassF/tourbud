@@ -1,4 +1,3 @@
-import 'package:app_1/shared/inputs/search_input.dart';
 import 'package:flutter/material.dart';
 
 class HomeTopContainer extends StatelessWidget {
@@ -7,7 +6,7 @@ class HomeTopContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 182,
+      height: 152,
       padding: const EdgeInsets.all(16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
