@@ -40,21 +40,22 @@ class _SearchInputState extends State<SearchInput> {
     return AnimatedPositioned(
       duration: Duration(milliseconds: widget.isSearch ? 400 : 250),
       curve: Curves.decelerate,
-      top: widget.isSearch ? 16 : 96,
-      left: 16,
-      height: 45,
-      width: MediaQuery.sizeOf(context).width - 32,
+      top: 16,
+      left: widget.isSearch ? 16 : 57,
+      height: 40,
+      width: MediaQuery.sizeOf(context).width - (widget.isSearch ? 32 : 73),
       child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
-                  blurRadius: 10.0,
-                  spreadRadius: -5,
-                  offset: const Offset(0.0, 6.0),
-                )
-              ]),
+            borderRadius: BorderRadius.circular(20),
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.black.withOpacity(0.2),
+            //     blurRadius: 10.0,
+            //     spreadRadius: -5,
+            //     offset: const Offset(0.0, 6.0),
+            //   )
+            // ]
+          ),
           child: TextField(
               focusNode: _focusNode,
               controller: _inputController,
@@ -85,7 +86,7 @@ class _SearchInputState extends State<SearchInput> {
 
                   // decoration styles
                   contentPadding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(20),
                     borderSide:
