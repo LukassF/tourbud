@@ -7,6 +7,7 @@ class BottomAppBarItem extends StatelessWidget {
   final void Function() onClick;
   final double? width;
   final double? height;
+
   const BottomAppBarItem(
       {super.key,
       required this.active,
@@ -22,7 +23,6 @@ class BottomAppBarItem extends StatelessWidget {
       child: Container(
         width: 60,
         margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-        padding: EdgeInsets.only(bottom: 10),
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           SvgPicture.asset(icon,
@@ -31,13 +31,6 @@ class BottomAppBarItem extends StatelessWidget {
               colorFilter: ColorFilter.mode(
                   active ? Colors.blue : Colors.grey.shade400, BlendMode.srcIn),
               semanticsLabel: 'A red up arrow'),
-          ClipOval(
-            child: Container(
-              height: 5,
-              width: 5,
-              color: active ? Colors.blue : Colors.transparent,
-            ),
-          )
         ]),
       ),
     );

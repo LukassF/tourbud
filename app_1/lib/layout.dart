@@ -1,6 +1,8 @@
-import 'package:app_1/components/BottomAppBar/BottomAppBar.dart';
-import 'package:app_1/pages/ProfilePage.dart';
-import 'package:app_1/pages/HomePage.dart';
+import 'package:app_1/components/BottomAppBar/bottom_appbar.dart';
+import 'package:app_1/pages/dashboard_page.dart';
+import 'package:app_1/pages/explore_page.dart';
+import 'package:app_1/pages/profile_page.dart';
+import 'package:app_1/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -24,11 +26,21 @@ class _LayoutState extends State<Layout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-            child: IndexedStack(
-          index: _pageIndex,
-          children: [HomePage(), ProfilePage()],
-        )),
+        body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: SafeArea(
+              child: IndexedStack(
+            index: _pageIndex,
+            children: [
+              HomePage(),
+              ExplorePage(),
+              DashboardPage(),
+              ProfilePage()
+            ],
+          )),
+        ),
         bottomNavigationBar: BottomBar(
           changePage: setPage,
           pageIndex: _pageIndex,

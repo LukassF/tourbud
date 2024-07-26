@@ -1,6 +1,5 @@
 import 'package:app_1/layout.dart';
-import 'package:app_1/pages/HomePage.dart';
-import 'package:app_1/pages/LoginPage.dart';
+import 'package:app_1/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -29,7 +28,7 @@ class _MyAppState extends State<MyApp> {
           scaffoldBackgroundColor: Colors.white,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
-          fontFamily: 'Ubuntu'),
+          fontFamily: 'Poppins'),
       initialRoute: "/",
       routes: {
         "/": (context) => Layout(),
