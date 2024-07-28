@@ -1,6 +1,5 @@
 import 'package:app_1/state/home_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeTopContainerBackground extends StatelessWidget {
   const HomeTopContainerBackground({super.key});
@@ -17,13 +16,13 @@ class HomeTopContainerBackground extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("assets/images/burano.webp"),
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: Column(
+                  child: const Column(
                     children: [
                       Expanded(
                         child: Row(

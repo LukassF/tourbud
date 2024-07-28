@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
 
         var data = jsonDecode(res.body);
         final String accessToken = data['content']['access_token'];
-        final String refreshToken = data['content']['refresh_token'];
+        // final String refreshToken = data['content']['refresh_token'];
 
         if (accessToken.isNotEmpty) {
           widget.setAccessToken(accessToken);
