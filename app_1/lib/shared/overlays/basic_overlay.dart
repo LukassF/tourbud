@@ -18,7 +18,7 @@ class _BasicOverlayState extends State<BasicOverlay> {
         width: widget.isOpen ? MediaQuery.sizeOf(context).width : 0,
         child: AnimatedOpacity(
           curve: Curves.decelerate,
-          duration: const Duration(milliseconds: 250),
+          duration: const Duration(milliseconds: 350),
           opacity: widget.isOpen ? 1 : 0,
           child: Container(
             color: Colors.white,

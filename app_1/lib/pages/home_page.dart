@@ -1,8 +1,10 @@
 import 'package:app_1/components/Home/FiltersContainer/home_filters_container.dart';
 import 'package:app_1/components/Home/TopContainer/home_top_container.dart';
+import 'package:app_1/components/Home/TopContainer/home_top_container_background.dart';
 import 'package:app_1/components/SearchView/search_view.dart';
-import 'package:app_1/shared/inputs/search_input.dart';
+import 'package:app_1/shared/heders/header.dart';
 import 'package:app_1/shared/overlays/basic_overlay.dart';
+import 'package:app_1/state/home_controller.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,30 +15,33 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _isSearch = false;
-
-  void onSearchToggle(bool open) {
-    setState(() {
-      _isSearch = open;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          const Column(
-            children: [HomeTopContainer(), HomeFiltersContainer()],
+          HomeTopContainerBackground(),
+          NotificationListener<ScrollNotification>(
+            child: const SingleChildScrollView(
+              child: Column(
+                children: [HomeTopContainer(), HomeFiltersContainer()],
+              ),
+            ),
+            onNotification: (scrollNotification) {
+              homeController
+                  .setScrollDistance(scrollNotification.metrics.pixels);
+              return false;
+            },
           ),
-          BasicOverlay(
-            isOpen: _isSearch,
-            child: SearchView(),
-          ),
-          SearchInput(
-            isSearch: _isSearch,
-            onSearchToggle: onSearchToggle,
-          )
+          StreamBuilder<bool>(
+              stream: homeController.isSearchOpenStream,
+              builder: (context, snapshot) {
+                return BasicOverlay(
+                  isOpen: snapshot.data ?? false,
+                  child: SearchView(),
+                );
+              }),
+          Header()
         ],
       ),
     );

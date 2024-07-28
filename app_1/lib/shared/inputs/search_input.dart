@@ -1,36 +1,26 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SearchInput extends StatefulWidget {
   final bool isSearch;
   final void Function(bool open) onSearchToggle;
+  final TextEditingController inputController;
+  final FocusNode focusNode;
 
   const SearchInput(
-      {super.key, required this.isSearch, required this.onSearchToggle});
+      {super.key,
+      required this.isSearch,
+      required this.onSearchToggle,
+      required this.focusNode,
+      required this.inputController});
 
   @override
   State<SearchInput> createState() => _SearchInputState();
 }
 
 class _SearchInputState extends State<SearchInput> {
-  final FocusNode _focusNode = FocusNode();
-  final _inputController = TextEditingController();
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    _inputController.dispose();
-    super.dispose();
-  }
-
-  void onIconTapAction() {
-    widget.onSearchToggle(!widget.isSearch);
-    if (widget.isSearch) {
-      _focusNode.unfocus();
-      _inputController.clear();
-    }
-  }
-
   void onSearchFocus() {
     widget.onSearchToggle(true);
   }
@@ -38,12 +28,12 @@ class _SearchInputState extends State<SearchInput> {
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-      duration: Duration(milliseconds: widget.isSearch ? 400 : 250),
+      duration: Duration(milliseconds: 400),
       curve: Curves.decelerate,
-      top: 16,
-      left: widget.isSearch ? 16 : 57,
+      top: 10,
+      left: widget.isSearch ? 16 : 65,
       height: 40,
-      width: MediaQuery.sizeOf(context).width - (widget.isSearch ? 32 : 73),
+      width: MediaQuery.sizeOf(context).width - (widget.isSearch ? 107 : 81),
       child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -56,49 +46,50 @@ class _SearchInputState extends State<SearchInput> {
             //   )
             // ]
           ),
-          child: TextField(
-              focusNode: _focusNode,
-              controller: _inputController,
-              onTap: onSearchFocus,
+          child: BackdropFilter(
+            filter: ImageFilter.blur(),
+            child: TextField(
+                focusNode: widget.focusNode,
+                controller: widget.inputController,
+                onTap: onSearchFocus,
 
-              // Text styles
-              cursorColor: Colors.blue,
-              style: const TextStyle(fontSize: 16),
+                // Text styles
+                cursorColor: Colors.blue,
+                style: const TextStyle(fontSize: 16),
 
-              // decorations
-              decoration: InputDecoration(
-                  hintText: 'Search places',
-                  hintStyle: TextStyle(color: Colors.grey[400]),
-                  suffixIcon: GestureDetector(
-                    onTap: onIconTapAction,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: SvgPicture.asset(
-                        widget.isSearch
-                            ? 'assets/icons/close.svg'
-                            : 'assets/icons/search.svg',
-                        height: 14,
-                        colorFilter: ColorFilter.mode(
-                            Colors.grey.shade400, BlendMode.srcIn),
+                // decorations
+                decoration: InputDecoration(
+                    hintText: 'Search places',
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    prefixIcon: GestureDetector(
+                      onTap: onSearchFocus,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: SvgPicture.asset(
+                          'assets/icons/search.svg',
+                          height: 14,
+                          colorFilter: ColorFilter.mode(
+                              Colors.grey.shade400, BlendMode.srcIn),
+                        ),
                       ),
                     ),
-                  ),
 
-                  // decoration styles
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide:
-                        const BorderSide(color: Colors.grey, width: 0.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide:
-                        const BorderSide(color: Colors.grey, width: 0.0),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white))),
+                    // decoration styles
+                    contentPadding:
+                        const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide:
+                          BorderSide(color: Colors.grey.shade400, width: 0.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide:
+                          BorderSide(color: Colors.grey.shade400, width: 0.0),
+                    ),
+                    filled: true,
+                    fillColor: Colors.white)),
+          )),
     );
   }
 }

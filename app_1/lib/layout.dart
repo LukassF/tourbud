@@ -3,6 +3,7 @@ import 'package:app_1/pages/dashboard_page.dart';
 import 'package:app_1/pages/explore_page.dart';
 import 'package:app_1/pages/profile_page.dart';
 import 'package:app_1/pages/home_page.dart';
+import 'package:app_1/state/app_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -14,15 +15,6 @@ class Layout extends StatefulWidget {
 }
 
 class _LayoutState extends State<Layout> {
-  int _pageIndex = 0;
-
-  void setPage(int index) {
-    setState(() {
-      print(index);
-      _pageIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,19 +23,19 @@ class _LayoutState extends State<Layout> {
             FocusScope.of(context).requestFocus(new FocusNode());
           },
           child: SafeArea(
-              child: IndexedStack(
-            index: _pageIndex,
-            children: [
-              HomePage(),
-              ExplorePage(),
-              DashboardPage(),
-              ProfilePage()
-            ],
+              child: StreamBuilder(
+            stream: appController.currentPageIndexStream,
+            builder: (context, snapshot) => IndexedStack(
+              index: snapshot.data,
+              children: [
+                HomePage(),
+                ExplorePage(),
+                DashboardPage(),
+                ProfilePage()
+              ],
+            ),
           )),
         ),
-        bottomNavigationBar: BottomBar(
-          changePage: setPage,
-          pageIndex: _pageIndex,
-        ));
+        bottomNavigationBar: BottomBar());
   }
 }

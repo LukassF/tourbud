@@ -20,33 +20,45 @@ class _HomeFiltersContainerState extends State<HomeFiltersContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 132,
+      height: 832,
       padding: const EdgeInsets.symmetric(vertical: 16),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10.0,
+              spreadRadius: -5,
+              offset: const Offset(0.0, -6.0),
+            )
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Chosen for you',
-                    style: TextStyle(fontWeight: FontWeight.w100, fontSize: 18),
-                  ),
-                  Text(
-                    'View all',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w100,
-                      fontSize: 15,
-                      color: Colors.grey[500],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+          // Expanded(
+          //   child: Container(
+          //     padding: const EdgeInsets.symmetric(horizontal: 16),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //       children: [
+          //         const Text(
+          //           'Chosen for you',
+          //           style: TextStyle(fontWeight: FontWeight.w100, fontSize: 18),
+          //         ),
+          //         Text(
+          //           'View all',
+          //           style: TextStyle(
+          //             fontWeight: FontWeight.w100,
+          //             fontSize: 15,
+          //             color: Colors.grey[500],
+          //           ),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
           Container(
             height: 60,
             child:
