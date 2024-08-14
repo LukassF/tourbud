@@ -1,11 +1,12 @@
-import 'package:app_1/components/Home/FiltersContainer/home_filters_container.dart';
+import 'package:flutter/material.dart';
+import 'package:app_1/components/Home/ContentContainer/home_content_container.dart';
 import 'package:app_1/components/Home/TopContainer/home_top_container.dart';
 import 'package:app_1/components/Home/TopContainer/home_top_container_background.dart';
 import 'package:app_1/components/SearchView/search_view.dart';
 import 'package:app_1/shared/heders/header.dart';
 import 'package:app_1/shared/overlays/basic_overlay.dart';
 import 'package:app_1/state/home_controller.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,6 +16,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey _homePageScrollKey = GlobalKey();
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,16 +32,64 @@ class _HomePageState extends State<HomePage> {
         children: [
           HomeTopContainerBackground(),
           NotificationListener<ScrollNotification>(
-            child: const SingleChildScrollView(
-              child: Column(
-                children: [HomeTopContainer(), HomeFiltersContainer()],
-              ),
-            ),
             onNotification: (scrollNotification) {
-              homeController
-                  .setScrollDistance(scrollNotification.metrics.pixels);
+              // Ensure the notification is from the specific ScrollController
+              if (scrollNotification.metrics.axis == Axis.vertical) {
+                homeController
+                    .setScrollDistance(scrollNotification.metrics.pixels);
+                return true;
+              }
               return false;
             },
+            child: SingleChildScrollView(
+              key: _homePageScrollKey,
+              controller: _scrollController,
+              child: HomeContentContainer(),
+              // Positioned(
+              //   top: 370,
+              //   width: MediaQuery.sizeOf(context).width,
+              //   height: 60,
+              //   child: Expanded(
+              //       child: Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //     child: Row(
+              //       children: [
+              //         Container(
+              //           padding: EdgeInsets.symmetric(horizontal: 16),
+              //           height: 45,
+              //           decoration: BoxDecoration(
+              //               color: Colors.blue,
+              //               borderRadius: BorderRadius.circular(16),
+              //               boxShadow: [
+              //                 BoxShadow(
+              //                   color: Colors.black.withOpacity(0.4),
+              //                   blurRadius: 10.0,
+              //                   spreadRadius: -2,
+              //                   offset: const Offset(0.0, 6.0),
+              //                 )
+              //               ]),
+              //           child: Row(
+              //             children: [
+              //               Container(
+              //                 margin: EdgeInsets.only(right: 5),
+              //                 child: SvgPicture.asset(
+              //                   'assets/icons/clock.svg',
+              //                   width: 20,
+              //                 ),
+              //               ),
+              //               Text(
+              //                 '12 days',
+              //                 style: TextStyle(
+              //                     color: Colors.white, fontSize: 13),
+              //               ),
+              //             ],
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   )),
+              // ),
+            ),
           ),
           StreamBuilder<bool>(
               stream: homeController.isSearchOpenStream,
@@ -41,23 +99,9 @@ class _HomePageState extends State<HomePage> {
                   child: SearchView(),
                 );
               }),
-          Header()
+          Header(),
         ],
       ),
     );
   }
 }
-
-
- // String username = "";
-  // void fetchUser() async {
-  //   if (widget.accessToken.isNotEmpty) {
-  //     Response user = await get(
-  //         Uri.parse('${Constants.BACKEND_BASE_URL}api/v1/users/2'),
-  //         headers: {"Authorization": "Bearer ${widget.accessToken}"});
-
-  //     var res = jsonDecode(user.body);
-
-  //     print(res);
-  //   }
-  // }

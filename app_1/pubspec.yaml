@@ -81,6 +81,10 @@ flutter:
       fonts:
         - asset: assets/fonts/Rubik-VariableFont_wght.ttf
 
+    - family: Quicksand
+      fonts:
+        - asset: assets/fonts/Quicksand-VariableFont_wght.ttf
+
     - family: Ubuntu
       fonts:
         - asset: assets/fonts/Ubuntu-Medium.ttf

@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:app_1/state/home_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class HomeTopContainerBackground extends StatelessWidget {
         stream: homeController.scrollDistanceStream.distinct(),
         builder: (context, snapshot) {
           return Positioned(
-            top: -((snapshot.data ?? 0) / 5),
+            top: -((snapshot.data ?? 0) / 2.5),
             height: 420,
             width: MediaQuery.sizeOf(context).width,
             child: Stack(
@@ -33,20 +34,42 @@ class HomeTopContainerBackground extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Positioned(
-                //     child: Container(
-                //   decoration: BoxDecoration(
-                //     gradient: LinearGradient(
-                //       colors: [
-                //         Colors.white.withOpacity(0.8),
-                //         Colors.white.withOpacity(0.2)
-                //       ],
-                //       stops: [0.15, 0.85],
-                //       begin: Alignment.topCenter,
-                //       end: Alignment.bottomCenter,
-                //     ),
-                //   ),
-                // ))
+                Positioned(
+                    height: 420,
+                    width: MediaQuery.sizeOf(context).width,
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40)),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+                        child: Container(
+                          color: Colors.black.withOpacity(0.2),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Strolling in',
+                                style: TextStyle(
+                                    color: Colors.grey[300],
+                                    fontSize: 24,
+                                    fontFamily: 'Dancing',
+                                    height: 0.5),
+                              ),
+                              const Text(
+                                'Burano, Italy',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 32,
+                                  fontFamily: 'Quicksand',
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ))
               ],
             ),
           );

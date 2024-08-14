@@ -7,3 +7,10 @@ class IBottomAppBarItem {
   const IBottomAppBarItem(
       {required this.activeIndex, required this.icon, this.height, this.width});
 }
+
+class IIndicatorLayout {
+  final double left;
+  final double width;
+
+  const IIndicatorLayout({required this.left, required this.width});
+}

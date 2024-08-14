@@ -40,33 +40,38 @@ class _HeaderState extends State<Header> {
         child: StreamBuilder<double>(
             stream: homeController.scrollDistanceStream,
             builder: (context, snapshot) {
-              return Container(
-                color: Colors.white
-                    .withOpacity(min((snapshot.data ?? 0) / 350, 1)),
-                child: StreamBuilder<bool>(
-                    stream: homeController.isSearchOpenStream,
-                    builder: (context, snapshot) {
-                      final bool isOpen = snapshot.data ?? false;
-                      return Stack(
-                        children: [
-                          MenuButton(
-                            isSearch: isOpen,
-                          ),
-                          CancelButton(
-                            isSearch: isOpen,
-                            onClick: () {
-                              onCancelSearch(isOpen);
-                            },
-                          ),
-                          SearchInput(
-                            isSearch: isOpen,
-                            onSearchToggle: homeController.toggleSearch,
-                            focusNode: _focusNode,
-                            inputController: _inputController,
-                          ),
-                        ],
-                      );
-                    }),
+              return ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20)),
+                child: Container(
+                  color: Colors.white
+                      .withOpacity(min((snapshot.data ?? 0) / 350, 1)),
+                  child: StreamBuilder<bool>(
+                      stream: homeController.isSearchOpenStream,
+                      builder: (context, snapshot) {
+                        final bool isOpen = snapshot.data ?? false;
+                        return Stack(
+                          children: [
+                            MenuButton(
+                              isSearch: isOpen,
+                            ),
+                            CancelButton(
+                              isSearch: isOpen,
+                              onClick: () {
+                                onCancelSearch(isOpen);
+                              },
+                            ),
+                            SearchInput(
+                              isSearch: isOpen,
+                              onSearchToggle: homeController.toggleSearch,
+                              focusNode: _focusNode,
+                              inputController: _inputController,
+                            ),
+                          ],
+                        );
+                      }),
+                ),
               );
             }));
   }

@@ -13,14 +13,16 @@ class MenuButton extends StatefulWidget {
 class _MenuButtonState extends State<MenuButton> {
   @override
   Widget build(BuildContext context) {
-    return Positioned(
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.decelerate,
       height: 40,
       width: 40,
       top: 10,
-      left: 16,
+      left: widget.isSearch ? -20 : 16,
       child: AnimatedOpacity(
         opacity: widget.isSearch ? 0 : 1,
-        duration: const Duration(milliseconds: 250),
+        duration: const Duration(milliseconds: 400),
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
