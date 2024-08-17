@@ -44,7 +44,12 @@ class _HomePageState extends State<HomePage> {
             child: SingleChildScrollView(
               key: _homePageScrollKey,
               controller: _scrollController,
-              child: HomeContentContainer(),
+              child: Stack(
+                children: [
+                  HomeTopContainer(),
+                  HomeContentContainer(),
+                ],
+              ),
               // Positioned(
               //   top: 370,
               //   width: MediaQuery.sizeOf(context).width,
@@ -58,7 +63,7 @@ class _HomePageState extends State<HomePage> {
               //           padding: EdgeInsets.symmetric(horizontal: 16),
               //           height: 45,
               //           decoration: BoxDecoration(
-              //               color: Colors.blue,
+              //               color: Theme.of(context).colorScheme.primary,
               //               borderRadius: BorderRadius.circular(16),
               //               boxShadow: [
               //                 BoxShadow(

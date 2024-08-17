@@ -53,17 +53,17 @@ class _HomeCategoryCardState extends State<HomeCategoryCard> {
             child: Container(
               key: key,
               margin: EdgeInsets.only(
-                  top: 8,
-                  bottom: 8,
                   left: (widget.isFirst ?? false) ? 16 : 4,
                   right: (widget.isLast ?? false) ? 16 : 4),
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Center(
                   child: Text(
                 widget.text,
                 style: TextStyle(
                     fontSize: 16,
-                    color: widget.isActive ? Colors.blue : Colors.grey[400],
+                    color: widget.isActive
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.grey[400],
                     fontWeight: FontWeight.normal),
               )),
             ),

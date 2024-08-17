@@ -35,43 +35,56 @@ class _HeaderState extends State<Header> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-        height: 60,
+        height: 65,
         width: MediaQuery.sizeOf(context).width,
         child: StreamBuilder<double>(
             stream: homeController.scrollDistanceStream,
             builder: (context, snapshot) {
-              return ClipRRect(
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20)),
-                child: Container(
-                  color: Colors.white
-                      .withOpacity(min((snapshot.data ?? 0) / 350, 1)),
-                  child: StreamBuilder<bool>(
-                      stream: homeController.isSearchOpenStream,
-                      builder: (context, snapshot) {
-                        final bool isOpen = snapshot.data ?? false;
-                        return Stack(
-                          children: [
-                            MenuButton(
-                              isSearch: isOpen,
-                            ),
-                            CancelButton(
-                              isSearch: isOpen,
-                              onClick: () {
-                                onCancelSearch(isOpen);
-                              },
-                            ),
-                            SearchInput(
-                              isSearch: isOpen,
-                              onSearchToggle: homeController.toggleSearch,
-                              focusNode: _focusNode,
-                              inputController: _inputController,
-                            ),
-                          ],
-                        );
-                      }),
+              double radius = snapshot.data != null && snapshot.data! < 350
+                  ? min((snapshot.data ?? 0) / 8.6, 40)
+                  : 0;
+              double opacity = min((snapshot.data ?? 0) / 350, 1);
+
+              return Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(radius),
+                      bottomRight: Radius.circular(radius)),
+                  color: Colors.white.withOpacity(opacity),
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.black
+                  //         .withOpacity(min((snapshot.data ?? 0) / 450, 0.1)),
+                  //     blurRadius: 10.0,
+                  //     spreadRadius: -5,
+                  //     offset: const Offset(0.0, 6.0),
+                  //   )
+                  // ],
                 ),
+                child: StreamBuilder<bool>(
+                    stream: homeController.isSearchOpenStream,
+                    builder: (context, snapshot) {
+                      final bool isOpen = snapshot.data ?? false;
+                      return Stack(
+                        children: [
+                          MenuButton(
+                            isSearch: isOpen,
+                          ),
+                          CancelButton(
+                            isSearch: isOpen,
+                            onClick: () {
+                              onCancelSearch(isOpen);
+                            },
+                          ),
+                          SearchInput(
+                            isSearch: isOpen,
+                            onSearchToggle: homeController.toggleSearch,
+                            focusNode: _focusNode,
+                            inputController: _inputController,
+                          ),
+                        ],
+                      );
+                    }),
               );
             }));
   }

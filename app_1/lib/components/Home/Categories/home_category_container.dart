@@ -1,3 +1,4 @@
+import 'package:app_1/classes/home/constants.dart';
 import 'package:app_1/classes/home/interfaces.dart';
 import 'package:app_1/components/Home/Categories/home_category_card.dart';
 import 'package:app_1/state/home_controller.dart';
@@ -16,7 +17,7 @@ class _HomeCategoryContainerState extends State<HomeCategoryContainer> {
     return StreamBuilder<int>(
         stream: homeController.activeCategoryStream,
         builder: (context, snapshot) {
-          return Container(
+          return SizedBox(
             height: 60,
             child: NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) {
@@ -29,34 +30,24 @@ class _HomeCategoryContainerState extends State<HomeCategoryContainer> {
                 Stack(
                   children: [
                     Row(
-                      children: [
-                        HomeCategoryCard(
-                          isActive: snapshot.data == 0,
-                          text: 'Featured',
-                          isFirst: true,
-                          index: 0,
-                          onClick: homeController.setActiveCategory,
-                        ),
-                        HomeCategoryCard(
-                            isActive: snapshot.data == 1,
-                            text: 'Nearby hikes',
-                            index: 1,
-                            onClick: homeController.setActiveCategory),
-                        HomeCategoryCard(
-                            isActive: snapshot.data == 2,
-                            text: 'Adrenaline rush',
-                            index: 2,
-                            onClick: homeController.setActiveCategory),
-                        HomeCategoryCard(
-                            isActive: snapshot.data == 3,
-                            text: 'Leisure',
-                            isLast: true,
-                            index: 3,
-                            onClick: homeController.setActiveCategory)
-                      ],
-                    ),
+                        children: HomeConstants.CATEGORIES
+                            .asMap()
+                            .entries
+                            .map(
+                              (category) => HomeCategoryCard(
+                                isActive: snapshot.data == category.key,
+                                text: category.value.label,
+                                isFirst: category.key == 0,
+                                isLast: category.key ==
+                                    HomeConstants.CATEGORIES.length - 1,
+                                index: category.key,
+                                onClick: category.value.onClick,
+                              ),
+                            )
+                            .toList()),
                     StreamBuilder<IIndicatorLayout>(
-                        stream: homeController.categoryIndicatorPosition,
+                        stream:
+                            homeController.categoryIndicatorPosition.distinct(),
                         builder: (context, indicatorSnapshot) {
                           return AnimatedPositioned(
                               duration: const Duration(milliseconds: 200),
@@ -71,7 +62,8 @@ class _HomeCategoryContainerState extends State<HomeCategoryContainer> {
                                   height: 2,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(100),
-                                    color: Colors.blue,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                   ),
                                 ),
                               ));

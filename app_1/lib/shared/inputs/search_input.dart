@@ -28,7 +28,7 @@ class _SearchInputState extends State<SearchInput> {
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-      duration: Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 400),
       curve: Curves.decelerate,
       top: 10,
       left: widget.isSearch ? 16 : 65,
@@ -54,13 +54,13 @@ class _SearchInputState extends State<SearchInput> {
                 onTap: onSearchFocus,
 
                 // Text styles
-                cursorColor: Colors.blue,
+                cursorColor: Colors.black.withOpacity(0.3),
                 style: const TextStyle(fontSize: 16),
 
                 // decorations
                 decoration: InputDecoration(
                     hintText: 'Search places',
-                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    hintStyle: TextStyle(color: Colors.black.withOpacity(0.3)),
                     prefixIcon: GestureDetector(
                       onTap: onSearchFocus,
                       child: Container(
@@ -69,7 +69,7 @@ class _SearchInputState extends State<SearchInput> {
                           'assets/icons/search.svg',
                           height: 14,
                           colorFilter: ColorFilter.mode(
-                              Colors.grey.shade400, BlendMode.srcIn),
+                              Colors.black.withOpacity(0.3), BlendMode.srcIn),
                         ),
                       ),
                     ),
@@ -79,13 +79,13 @@ class _SearchInputState extends State<SearchInput> {
                         const EdgeInsets.symmetric(vertical: 7, horizontal: 20),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          BorderSide(color: Colors.grey.shade400, width: 0.0),
+                      borderSide: BorderSide(
+                          color: Colors.black.withOpacity(0.3), width: 0.0),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          BorderSide(color: Colors.grey.shade400, width: 0.0),
+                      borderSide: BorderSide(
+                          color: Colors.black.withOpacity(0.3), width: 0.0),
                     ),
                     filled: true,
                     fillColor: Colors.white)),

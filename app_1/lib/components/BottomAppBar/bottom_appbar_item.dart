@@ -29,7 +29,10 @@ class BottomAppBarItem extends StatelessWidget {
               height: height ?? 24,
               width: width ?? 24,
               colorFilter: ColorFilter.mode(
-                  active ? Colors.blue : Colors.grey.shade400, BlendMode.srcIn),
+                  active
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.grey.shade400,
+                  BlendMode.srcIn),
               semanticsLabel: 'A red up arrow'),
         ]),
       ),

@@ -26,7 +26,13 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.white,
+              primary: Color.fromARGB(255, 0, 179, 255),
+              secondary: Color.fromARGB(255, 255, 82, 131),
+              secondaryContainer: Color.fromARGB(255, 187, 187, 187),
+              tertiary: Color.fromARGB(255, 120, 118, 118),
+              tertiaryContainer: Color.fromARGB(255, 245, 245, 245)),
           useMaterial3: true,
           fontFamily: 'Poppins'),
       initialRoute: "/",

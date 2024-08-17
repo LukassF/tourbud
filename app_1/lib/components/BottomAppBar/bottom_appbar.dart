@@ -17,7 +17,17 @@ class _BottomBarState extends State<BottomBar> {
     return BottomAppBar(
       padding: const EdgeInsets.all(0),
       child: Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.1),
+          //     blurRadius: 10.0,
+          //     spreadRadius: -5,
+          //     offset: const Offset(0.0, -5.0),
+          //   )
+          // ],
+        ),
         height: 60,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -58,7 +68,7 @@ class _BottomBarState extends State<BottomBar> {
                               child: Container(
                                 height: 5,
                                 width: 5,
-                                color: Colors.blue,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                             ),
                           )

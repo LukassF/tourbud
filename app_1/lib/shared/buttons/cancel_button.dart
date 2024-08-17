@@ -1,3 +1,4 @@
+import 'package:app_1/shared/wrappers/text_ripple_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class CancelButton extends StatefulWidget {
@@ -20,15 +21,14 @@ class _CancelButtonState extends State<CancelButton> {
         height: 40,
         child: AnimatedOpacity(
           opacity: widget.isSearch ? 1 : 0,
-          duration: const Duration(milliseconds: 400),
-          child: TextButton(
+          duration: const Duration(milliseconds: 200),
+          child: TextRippleWrapper(
+            padding: EdgeInsets.all(10),
+            onPressed: widget.onClick,
             child: Text(
               'Cancel',
-              style: TextStyle(color: Colors.blue, fontSize: 14),
-            ),
-            onPressed: widget.onClick,
-            style: TextButton.styleFrom(
-              splashFactory: NoSplash.splashFactory,
+              style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary, fontSize: 14),
             ),
           ),
         ));

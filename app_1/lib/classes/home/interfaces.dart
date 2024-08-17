@@ -14,3 +14,10 @@ class IIndicatorLayout {
 
   const IIndicatorLayout({required this.left, required this.width});
 }
+
+class ICategoryCard {
+  final String label;
+  final void Function(int index) onClick;
+
+  const ICategoryCard({required this.label, required this.onClick});
+}

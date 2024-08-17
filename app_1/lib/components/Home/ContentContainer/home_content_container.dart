@@ -1,5 +1,6 @@
 import 'package:app_1/components/Home/Categories/home_category_card.dart';
 import 'package:app_1/components/Home/Categories/home_category_container.dart';
+import 'package:app_1/components/Home/TopResults/home_top_results_container.dart';
 import 'package:app_1/shared/wrappers/inverted_border_wrapper.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,7 @@ class _HomeContentContainerState extends State<HomeContentContainer> {
       // ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [HomeCategoryContainer()],
+        children: [HomeCategoryContainer(), HomeTopResultsContainer()],
       ),
     );
   }

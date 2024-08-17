@@ -11,7 +11,9 @@ class HomeTopContainerBackground extends StatelessWidget {
         stream: homeController.scrollDistanceStream.distinct(),
         builder: (context, snapshot) {
           return Positioned(
-            top: -((snapshot.data ?? 0) / 2.5),
+            top: snapshot.data != null && snapshot.data! < 100
+                ? -snapshot.data!
+                : -100 - (((snapshot.data ?? 0) - 100) / 2.5),
             height: 420,
             width: MediaQuery.sizeOf(context).width,
             child: Stack(
@@ -19,7 +21,7 @@ class HomeTopContainerBackground extends StatelessWidget {
                 Container(
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/burano.webp"),
+                      image: AssetImage("assets/images/beach.jpg"),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -42,7 +44,7 @@ class HomeTopContainerBackground extends StatelessWidget {
                           bottomLeft: Radius.circular(40),
                           bottomRight: Radius.circular(40)),
                       child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+                        filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
                         child: Container(
                           color: Colors.black.withOpacity(0.2),
                           child: Column(
@@ -69,7 +71,7 @@ class HomeTopContainerBackground extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ))
+                    )),
               ],
             ),
           );
