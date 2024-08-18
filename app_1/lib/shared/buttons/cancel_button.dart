@@ -1,4 +1,4 @@
-import 'package:app_1/shared/wrappers/text_ripple_wrapper.dart';
+import 'package:app_1/shared/wrappers/ripple_wrapper.dart';
 import 'package:flutter/material.dart';
 
 class CancelButton extends StatefulWidget {
@@ -22,7 +22,7 @@ class _CancelButtonState extends State<CancelButton> {
         child: AnimatedOpacity(
           opacity: widget.isSearch ? 1 : 0,
           duration: const Duration(milliseconds: 200),
-          child: TextRippleWrapper(
+          child: RippleWrapper(
             padding: EdgeInsets.all(10),
             onPressed: widget.onClick,
             child: Text(

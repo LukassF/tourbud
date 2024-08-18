@@ -1,8 +1,5 @@
-import 'dart:ui';
-
 import 'package:app_1/state/home_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeTopContainer extends StatefulWidget {
   const HomeTopContainer({super.key});

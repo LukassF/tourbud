@@ -1,5 +1,5 @@
-import 'package:app_1/components/Home/Categories/home_category_card.dart';
 import 'package:app_1/components/Home/Categories/home_category_container.dart';
+import 'package:app_1/components/Home/Countries/home_countries_container.dart';
 import 'package:app_1/components/Home/TopResults/home_top_results_container.dart';
 import 'package:app_1/shared/wrappers/inverted_border_wrapper.dart';
 import 'package:flutter/material.dart';
@@ -12,17 +12,10 @@ class HomeContentContainer extends StatefulWidget {
 }
 
 class _HomeContentContainerState extends State<HomeContentContainer> {
-  int _activeCategory = 0;
-
-  void setNewCategory(int index) {
-    setState(() {
-      _activeCategory = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
+      // TODO: remove
       height: 832,
       margin: const EdgeInsets.only(top: 370),
       padding: const EdgeInsets.only(top: 56),
@@ -43,9 +36,13 @@ class _HomeContentContainerState extends State<HomeContentContainer> {
       //     offset: const Offset(0.0, -6.0),
       //   )
       // ]),
-      child: Column(
+      child: const Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [HomeCategoryContainer(), HomeTopResultsContainer()],
+        children: [
+          HomeCategoryContainer(),
+          HomeTopResultsContainer(),
+          HomeCountriesContainer()
+        ],
       ),
     );
   }

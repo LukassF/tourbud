@@ -1,5 +1,5 @@
 import 'package:app_1/classes/interfaces.dart';
-import 'package:app_1/shared/wrappers/text_ripple_wrapper.dart';
+import 'package:app_1/shared/wrappers/ripple_wrapper.dart';
 import 'package:app_1/shared/cards/trip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -37,7 +37,7 @@ class _HomeTopResultsContainerState extends State<HomeTopResultsContainer> {
                 ),
                 TripCard(
                   type: TRIP_CARD_TYPE.TRIP,
-                  image: 'assets/images/norway.jpg',
+                  image: 'assets/images/northern_lights.jpg',
                   name: 'Northern Adventure',
                   location: 'Oslo, Norway',
                   price: 1019.99,
@@ -64,7 +64,8 @@ class _HomeTopResultsContainerState extends State<HomeTopResultsContainer> {
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextRippleWrapper(
+                    RippleWrapper(
+                      customOpacity: 0.5,
                       padding: EdgeInsets.all(8.0),
                       onPressed: () {
                         showModalBottomSheet(
@@ -85,23 +86,20 @@ class _HomeTopResultsContainerState extends State<HomeTopResultsContainer> {
                             'assets/icons/filter.svg',
                             width: 13,
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context)
-                                    .colorScheme
-                                    .secondaryContainer,
+                                Theme.of(context).colorScheme.secondary,
                                 BlendMode.srcIn),
                           ),
                         ),
                         Text(
                           'Filter results',
                           style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
+                              color: Theme.of(context).colorScheme.secondary,
                               fontSize: 13),
                         )
                       ]),
                     ),
-                    TextRippleWrapper(
+                    RippleWrapper(
+                      customOpacity: 0.5,
                       padding: EdgeInsets.all(8.0),
                       onPressed: () {},
                       child: Row(children: [
@@ -111,18 +109,14 @@ class _HomeTopResultsContainerState extends State<HomeTopResultsContainer> {
                             'assets/icons/sort.svg',
                             width: 18,
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context)
-                                    .colorScheme
-                                    .secondaryContainer,
+                                Theme.of(context).colorScheme.secondary,
                                 BlendMode.srcIn),
                           ),
                         ),
                         Text(
                           'Sort results',
                           style: TextStyle(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .secondaryContainer,
+                              color: Theme.of(context).colorScheme.secondary,
                               fontSize: 13),
                         )
                       ]),

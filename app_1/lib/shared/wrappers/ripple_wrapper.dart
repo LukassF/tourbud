@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-class TextRippleWrapper extends StatefulWidget {
+class RippleWrapper extends StatefulWidget {
   final Widget child;
   final Function onPressed;
   final Icon? icon;
   final EdgeInsetsGeometry? padding;
-  const TextRippleWrapper(
+  final double? customOpacity;
+  const RippleWrapper(
       {super.key,
       required this.child,
       required this.onPressed,
       this.icon,
-      this.padding});
+      this.padding,
+      this.customOpacity});
 
   @override
-  State<TextRippleWrapper> createState() => _TextRippleWrapperState();
+  State<RippleWrapper> createState() => _RippleWrapperState();
 }
 
-class _TextRippleWrapperState extends State<TextRippleWrapper> {
+class _RippleWrapperState extends State<RippleWrapper> {
   bool isPressed = false;
 
   @override
@@ -46,7 +48,7 @@ class _TextRippleWrapperState extends State<TextRippleWrapper> {
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 90),
           curve: Curves.decelerate,
-          opacity: isPressed ? 0.5 : 1,
+          opacity: isPressed ? (widget.customOpacity ?? 0.8) : 1,
           child: widget.child,
         ),
       ),
