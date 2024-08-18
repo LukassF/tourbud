@@ -30,14 +30,16 @@ class TripCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isTrip = type == TRIP_CARD_TYPE.TRIP;
+
     return RippleWrapper(
       onPressed: () {},
       child: Container(
-        height: type == TRIP_CARD_TYPE.TRIP ? 190 : 150,
+        height: isTrip ? 190 : 150,
         width: 250,
         margin: EdgeInsets.only(right: isLast == true ? 0 : 8),
         child: Stack(children: [
-          type == TRIP_CARD_TYPE.TRIP
+          isTrip
               ? Positioned(
                   bottom: 0,
                   height: 40,
@@ -96,7 +98,7 @@ class TripCard extends StatelessWidget {
                       )
                     ],
                   ))
-              : SizedBox.shrink(),
+              : const SizedBox.shrink(),
           Positioned(
               child: Container(
                   height: 150,
@@ -126,7 +128,7 @@ class TripCard extends StatelessWidget {
                           Colors.black.withOpacity(0.1),
                           Colors.black.withOpacity(0.6)
                         ],
-                        stops: [0.25, 0.75],
+                        stops: const [0.25, 0.75],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                       )),
@@ -146,6 +148,26 @@ class TripCard extends StatelessWidget {
                                   fontSize: 18),
                             ),
                           ),
+                          isTrip
+                              ? const SizedBox.shrink()
+                              : Wrap(
+                                  spacing: 5,
+                                  children: List.generate(5, (index) {
+                                    final isFilled =
+                                        (index + 1) <= (rating ?? 0);
+                                    return SvgPicture.asset(
+                                      'assets/icons/star_filled.svg',
+                                      colorFilter: ColorFilter.mode(
+                                          isFilled
+                                              ? Theme.of(context)
+                                                  .colorScheme
+                                                  .primary
+                                              : Theme.of(context)
+                                                  .colorScheme
+                                                  .tertiary,
+                                          BlendMode.srcIn),
+                                    );
+                                  }))
                         ],
                       ),
                       Row(
@@ -177,7 +199,10 @@ class TripCard extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(left: 8),
-                            child: Text('$price\$',
+                            child: Text(
+                                isTrip
+                                    ? '$price\$'
+                                    : '${GeneralUtils.formatAmount(mentions ?? 0)} mentions',
                                 style: TextStyle(
                                     color: Colors.white.withOpacity(0.7),
                                     fontSize: 14)),

@@ -30,4 +30,16 @@ class GeneralUtils {
       return '$numberOfPeople people';
     }
   }
+
+  static String formatAmount(num amount) {
+    if (amount < 1000) {
+      return '$amount';
+    }
+
+    if (amount < 1000000) {
+      return '${(amount / 1000).round()}k';
+    }
+
+    return '${(amount / 1000000).round()}m';
+  }
 }

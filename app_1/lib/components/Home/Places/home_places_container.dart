@@ -1,18 +1,19 @@
-import 'package:app_1/shared/cards/country_card.dart';
+import 'package:app_1/classes/interfaces.dart';
+import 'package:app_1/shared/cards/trip_card.dart';
 import 'package:flutter/material.dart';
 
-class HomeCountriesContainer extends StatefulWidget {
-  const HomeCountriesContainer({super.key});
+class HomePlacesContainer extends StatefulWidget {
+  const HomePlacesContainer({super.key});
 
   @override
-  State<HomeCountriesContainer> createState() => _HomeCountriesContainerState();
+  State<HomePlacesContainer> createState() => _HomePlacesContainerState();
 }
 
-class _HomeCountriesContainerState extends State<HomeCountriesContainer> {
+class _HomePlacesContainerState extends State<HomePlacesContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 190,
+      height: 250,
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Container(
@@ -23,7 +24,7 @@ class _HomeCountriesContainerState extends State<HomeCountriesContainer> {
               Container(
                 padding: const EdgeInsets.only(left: 16.0),
                 child: const Text(
-                  'Top countries',
+                  'Top places',
                   style: TextStyle(fontSize: 18),
                 ),
               ),
@@ -37,27 +38,26 @@ class _HomeCountriesContainerState extends State<HomeCountriesContainer> {
         ),
         Expanded(
           child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             scrollDirection: Axis.horizontal,
-            children: [
-              CountryCard(
-                  label: 'Italy',
-                  image: 'assets/images/italy.png',
-                  onPress: () {}),
-              CountryCard(
-                  label: 'France',
-                  image: 'assets/images/france.png',
-                  onPress: () {}),
-              CountryCard(
-                  label: 'Spain',
-                  image: 'assets/images/spain.webp',
-                  onPress: () {}),
-              CountryCard(
-                label: 'Switzerland',
-                image: 'assets/images/switzerland.jpg',
-                onPress: () {},
-                isLast: true,
+            children: const [
+              TripCard(
+                type: TRIP_CARD_TYPE.PLACE,
+                name: 'Eifell Tower',
+                location: 'Paris, France',
+                image: 'assets/images/eifel_tower.jpg',
+                mentions: 122000,
+                rating: 2,
               ),
+              TripCard(
+                type: TRIP_CARD_TYPE.PLACE,
+                name: 'Machu Picchu',
+                location: 'Peru',
+                image: 'assets/images/machu_picchu.jpg',
+                mentions: 212100,
+                rating: 4,
+                isLast: true,
+              )
             ],
           ),
         )
