@@ -4,6 +4,7 @@ import 'package:app_1/components/Home/Countries/home_countries_container.dart';
 import 'package:app_1/components/Home/Places/home_places_container.dart';
 import 'package:app_1/components/Home/TopResults/home_top_results_container.dart';
 import 'package:app_1/shared/wrappers/inverted_border_wrapper.dart';
+import 'package:app_1/state/app_controller.dart';
 import 'package:flutter/material.dart';
 
 class HomeContentContainer extends StatefulWidget {
@@ -23,30 +24,32 @@ class _HomeContentContainerState extends State<HomeContentContainer> {
 
   @override
   Widget build(BuildContext context) {
-        bool isIos = Theme.of(context).platform == TargetPlatform.iOS;
-
-    return Container(
-      margin:  EdgeInsets.only(top: isIos ? 410 : 370),
-      padding: const EdgeInsets.only(top: 46),
-      decoration: const ShapeDecoration(
-        shape: SwTicketBorder(
-            radius: 30,
-            fillColor: Colors.white,
-            topLeft: true,
-            topRight: true,
-            bottomLeft: false,
-            bottomRight: false),
-      ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          HomeCategoryContainer(),
-          HomeTopResultsContainer(),
-          HomeCountriesContainer(),
-          ContributeCard(),
-          HomePlacesContainer()
-        ],
-      ),
-    );
+    return StreamBuilder<double>(
+        stream: appController.statusBarHeightStream,
+        builder: (context, snapshot) {
+          return Container(
+            margin: EdgeInsets.only(top: 370 + (snapshot.data ?? 0)),
+            padding: const EdgeInsets.only(top: 46),
+            decoration: const ShapeDecoration(
+              shape: SwTicketBorder(
+                  radius: 30,
+                  fillColor: Colors.white,
+                  topLeft: true,
+                  topRight: true,
+                  bottomLeft: false,
+                  bottomRight: false),
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                HomeCategoryContainer(),
+                HomeTopResultsContainer(),
+                HomeCountriesContainer(),
+                ContributeCard(),
+                HomePlacesContainer()
+              ],
+            ),
+          );
+        });
   }
 }

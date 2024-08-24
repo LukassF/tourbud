@@ -1,5 +1,6 @@
 import 'package:app_1/layout.dart';
 import 'package:app_1/pages/login_page.dart';
+import 'package:app_1/state/app_controller.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -22,6 +23,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    appController.setStatusBarHeight(MediaQuery.of(context).padding.top);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(

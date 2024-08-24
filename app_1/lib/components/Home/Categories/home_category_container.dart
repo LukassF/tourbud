@@ -64,7 +64,7 @@ class _HomeCategoryContainerState extends State<HomeCategoryContainer> {
                                     color: Theme.of(context)
                                         .colorScheme
                                         .primary
-                                        .withOpacity(0.1),
+                                        .withOpacity(0.07),
                                   ),
                                 ),
                               ));

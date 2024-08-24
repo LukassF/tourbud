@@ -64,7 +64,8 @@ class _HomeCategoryCardState extends State<HomeCategoryCard> {
                     color: widget.isActive
                         ? Theme.of(context).colorScheme.primary
                         : Colors.grey[400],
-                    fontWeight: FontWeight.normal),
+                    fontWeight: FontWeight.w900,
+                    fontFamily: 'Quicksand'),
               )),
             ),
           );

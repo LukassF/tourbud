@@ -29,7 +29,6 @@ class BottomAppBarItem extends StatelessWidget {
           RenderBox box = context.findRenderObject() as RenderBox;
           Offset position = box.localToGlobal(Offset.zero);
           double left = position.dx + 20;
-          print(left);
 
           appController.updateTabIndicatorPosition(left);
         }

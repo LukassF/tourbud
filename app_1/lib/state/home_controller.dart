@@ -24,7 +24,7 @@ class HomeController {
   }
 
   final BehaviorSubject<IIndicatorLayout> _categoryIndicatorPosition =
-      BehaviorSubject.seeded(IIndicatorLayout(left: 16, width: 95));
+      BehaviorSubject.seeded(IIndicatorLayout(left: 16, width: 88.6));
   Stream<IIndicatorLayout> get categoryIndicatorPosition =>
       _categoryIndicatorPosition.stream;
   updateCategoryIndicatorPosition(IIndicatorLayout layout) {
@@ -32,7 +32,7 @@ class HomeController {
   }
 
   final BehaviorSubject<double> _categoryListScrollDistance =
-      BehaviorSubject.seeded(0.0);
+      BehaviorSubject.seeded(0);
   Stream<double> get categoryListScrollDistance =>
       _categoryListScrollDistance.stream;
   updateCategoryListScrollDistance(double distance) {
