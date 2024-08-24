@@ -13,13 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey _homePageScrollKey = GlobalKey();
-  final ScrollController _scrollController = ScrollController();
 
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             },
             child: SingleChildScrollView(
               key: _homePageScrollKey,
-              controller: _scrollController,
+              physics: ClampingScrollPhysics(),
               child: const Stack(
                 children: [
                   HomeTopContainer(),

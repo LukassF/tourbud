@@ -26,7 +26,7 @@ class _LayoutState extends State<Layout> {
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
-          child: SafeArea(
+          // child: SafeArea(
               child: StreamBuilder(
             stream: appController.currentPageIndexStream,
             builder: (context, snapshot) => Stack(
@@ -52,7 +52,7 @@ class _LayoutState extends State<Layout> {
               ],
             ),
           )),
-        ),
+        // ),s
         bottomNavigationBar: const BottomBar());
   }
 }

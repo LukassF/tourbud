@@ -23,8 +23,10 @@ class _HomeContentContainerState extends State<HomeContentContainer> {
 
   @override
   Widget build(BuildContext context) {
+        bool isIos = Theme.of(context).platform == TargetPlatform.iOS;
+
     return Container(
-      margin: const EdgeInsets.only(top: 370),
+      margin:  EdgeInsets.only(top: isIos ? 410 : 370),
       padding: const EdgeInsets.only(top: 46),
       decoration: const ShapeDecoration(
         shape: SwTicketBorder(

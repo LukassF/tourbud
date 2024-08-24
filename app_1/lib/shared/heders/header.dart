@@ -1,5 +1,5 @@
+import 'dart:io';
 import 'dart:math';
-
 import 'package:app_1/shared/buttons/cancel_button.dart';
 import 'package:app_1/shared/buttons/menu_button.dart';
 import 'package:app_1/shared/inputs/search_input.dart';
@@ -34,8 +34,9 @@ class _HeaderState extends State<Header> {
 
   @override
   Widget build(BuildContext context) {
+    bool isIos = Theme.of(context).platform == TargetPlatform.iOS;
     return Positioned(
-        height: 65,
+        height: isIos ? 105 : 65,
         width: MediaQuery.sizeOf(context).width,
         child: StreamBuilder<double>(
             stream: homeController.scrollDistanceStream,
@@ -46,6 +47,7 @@ class _HeaderState extends State<Header> {
               double opacity = min((snapshot.data ?? 0) / 350, 1);
 
               return Container(
+                padding: EdgeInsets.only(top: isIos ? 40 : 0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(radius),

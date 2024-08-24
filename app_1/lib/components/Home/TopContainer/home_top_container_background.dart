@@ -7,6 +7,8 @@ class HomeTopContainerBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        bool isIos = Theme.of(context).platform == TargetPlatform.iOS;
+
     return StreamBuilder<double>(
         stream: homeController.scrollDistanceStream.distinct(),
         builder: (context, snapshot) {
@@ -14,7 +16,7 @@ class HomeTopContainerBackground extends StatelessWidget {
             top: snapshot.data != null && snapshot.data! < 150
                 ? -snapshot.data!
                 : -150 - (((snapshot.data ?? 0) - 150) / 2.5),
-            height: 420,
+            height: isIos ? 460:420,
             width: MediaQuery.sizeOf(context).width,
             child: Stack(
               children: [
@@ -37,7 +39,7 @@ class HomeTopContainerBackground extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    height: 420,
+                    height: isIos ? 460 : 420,
                     width: MediaQuery.sizeOf(context).width,
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(
