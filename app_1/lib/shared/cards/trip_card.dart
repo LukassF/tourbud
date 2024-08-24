@@ -13,7 +13,7 @@ class TripCard extends StatelessWidget {
   final num? price;
   final int? days;
   final int? people;
-  final int? rating;
+  final num? rating;
   final num? mentions;
   const TripCard(
       {super.key,
@@ -35,182 +35,219 @@ class TripCard extends StatelessWidget {
     return RippleWrapper(
       onPressed: () {},
       child: Container(
-        height: isTrip ? 190 : 150,
-        width: 250,
-        margin: EdgeInsets.only(right: isLast == true ? 0 : 8),
+        width: 300,
+        margin: EdgeInsets.only(right: isLast == true ? 0 : 16),
         child: Stack(children: [
-          isTrip
-              ? Positioned(
-                  bottom: 0,
-                  height: 40,
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 4.0),
-                              child: SvgPicture.asset('assets/icons/clock.svg',
-                                  width: 12,
-                                  height: 12,
-                                  colorFilter: ColorFilter.mode(
-                                      Theme.of(context).colorScheme.tertiary,
-                                      BlendMode.srcIn)),
-                            ),
-                            Text(
-                              GeneralUtils.formatTripDuration(days ?? 0),
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.w600,
-                                  color:
-                                      Theme.of(context).colorScheme.tertiary),
-                            )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 4.0),
-                              child: SvgPicture.asset(
-                                  'assets/icons/profile.svg',
-                                  width: 12,
-                                  height: 13,
-                                  colorFilter: ColorFilter.mode(
-                                      Theme.of(context).colorScheme.tertiary,
-                                      BlendMode.srcIn)),
-                            ),
-                            Text(
-                              GeneralUtils.formatNumberOfPeople(people ?? 0),
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: 'Quicksand',
-                                  fontWeight: FontWeight.w600,
-                                  color:
-                                      Theme.of(context).colorScheme.tertiary),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ))
-              : const SizedBox.shrink(),
           Positioned(
-              child: Container(
-                  height: 150,
+              child: Column(
+            children: [
+              Container(
+                  height: 180,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.2),
-                        blurRadius: 10.0,
+                        blurRadius: 8.0,
                         spreadRadius: -2,
                         offset: const Offset(0.0, 6.0),
                       )
                     ],
                     borderRadius: BorderRadius.circular(8),
                     image: DecorationImage(
-                      image: AssetImage(image),
-                      fit: BoxFit.cover,
-                    ),
-                  ))),
-          Positioned(
-              child: Container(
-                  height: 150,
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.black.withOpacity(0.1),
-                          Colors.black.withOpacity(0.6)
-                        ],
-                        stops: const [0.25, 0.75],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      )),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                        image: AssetImage(
+                          image,
+                        ),
+                        fit: BoxFit.cover,
+                        colorFilter: ColorFilter.mode(
+                          Colors.grey.withOpacity(0.2),
+                          BlendMode.srcOver,
+                        )),
+                  )),
+              Container(
+                height: 65,
+                padding: EdgeInsets.all(10),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
                               name,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w900,
+                                  fontFamily: 'Quicksand',
                                   fontSize: 18),
                             ),
-                          ),
-                          isTrip
-                              ? const SizedBox.shrink()
-                              : Wrap(
-                                  spacing: 5,
-                                  children: List.generate(5, (index) {
-                                    final isFilled =
-                                        (index + 1) <= (rating ?? 0);
-                                    return SvgPicture.asset(
-                                      'assets/icons/star_filled.svg',
-                                      colorFilter: ColorFilter.mode(
-                                          isFilled
-                                              ? Theme.of(context)
-                                                  .colorScheme
-                                                  .primary
-                                              : Theme.of(context)
-                                                  .colorScheme
-                                                  .tertiary,
-                                          BlendMode.srcIn),
-                                    );
-                                  }))
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(right: 4),
-                                  child: SvgPicture.asset(
-                                      'assets/icons/location.svg',
-                                      width: 14,
-                                      height: 14,
-                                      colorFilter: const ColorFilter.mode(
-                                          Colors.white, BlendMode.srcIn)),
-                                ),
-                                Expanded(
-                                  child: Text(
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(right: 4),
+                                    child: SvgPicture.asset(
+                                        'assets/icons/location.svg',
+                                        width: 12,
+                                        height: 12,
+                                        colorFilter: ColorFilter.mode(
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .tertiary,
+                                            BlendMode.srcIn)),
+                                  ),
+                                  Text(
                                     location,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
-                                        fontSize: 14),
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
+                                        fontWeight: FontWeight.w100,
+                                        fontSize: 11),
                                   ),
-                                )
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(left: 8),
-                            child: Text(
-                                isTrip
-                                    ? '$price\$'
-                                    : '${GeneralUtils.formatAmount(mentions ?? 0)} mentions',
-                                style: TextStyle(
-                                    color: Colors.white.withOpacity(0.7),
-                                    fontSize: 14)),
-                          )
-                        ],
-                      )
-                    ],
-                  )))
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            isTrip
+                                ? Row(
+                                    children: [
+                                      Text(
+                                        GeneralUtils.formatTripDuration(
+                                            days ?? 0),
+                                        style: TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: 'Quicksand',
+                                            fontWeight: FontWeight.w100,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .tertiary),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: SvgPicture.asset(
+                                            'assets/icons/clock.svg',
+                                            width: 11,
+                                            height: 11,
+                                            colorFilter: ColorFilter.mode(
+                                                Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary,
+                                                BlendMode.srcIn)),
+                                      ),
+                                    ],
+                                  )
+                                : Expanded(
+                                    child: Wrap(
+                                        spacing: 5,
+                                        children: List.generate(5, (index) {
+                                          final isFilled =
+                                              (index + 1) <= (rating ?? 0);
+                                          return SvgPicture.asset(
+                                            'assets/icons/star_filled.svg',
+                                            colorFilter: ColorFilter.mode(
+                                                isFilled
+                                                    ? Theme.of(context)
+                                                        .colorScheme
+                                                        .primary
+                                                    : Theme.of(context)
+                                                        .colorScheme
+                                                        .primary
+                                                        .withOpacity(0.2),
+                                                BlendMode.srcIn),
+                                          );
+                                        })),
+                                  ),
+                            isTrip
+                                ? Row(
+                                    children: [
+                                      Text(
+                                        GeneralUtils.formatNumberOfPeople(
+                                            people ?? 0),
+                                        style: TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: 'Quicksand',
+                                            fontWeight: FontWeight.w100,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .tertiary),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 8.0),
+                                        child: SvgPicture.asset(
+                                            'assets/icons/profile.svg',
+                                            width: 11,
+                                            height: 11,
+                                            colorFilter: ColorFilter.mode(
+                                                Theme.of(context)
+                                                    .colorScheme
+                                                    .tertiary,
+                                                BlendMode.srcIn)),
+                                      ),
+                                    ],
+                                  )
+                                : Expanded(
+                                    child: Text(
+                                      '$rating (${GeneralUtils.formatAmount(mentions ?? 0)} mentions)',
+                                      style: TextStyle(
+                                          fontSize: 11,
+                                          fontFamily: 'Quicksand',
+                                          fontWeight: FontWeight.w100,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary),
+                                    ),
+                                  ),
+                          ],
+                        ),
+                      ),
+                    ]),
+              ),
+            ],
+          )),
+          isTrip
+              ? Positioned(
+                  bottom: 55,
+                  right: 10,
+                  child: Container(
+                    height: 35,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8.0,
+                          spreadRadius: -2,
+                          offset: const Offset(0.0, 5.0),
+                        )
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        '$price\$',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink()
         ]),
       ),
     );

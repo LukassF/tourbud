@@ -1,4 +1,5 @@
 import 'package:app_1/components/Home/Categories/home_category_container.dart';
+import 'package:app_1/components/Home/Contribute/contribute_card.dart';
 import 'package:app_1/components/Home/Countries/home_countries_container.dart';
 import 'package:app_1/components/Home/Places/home_places_container.dart';
 import 'package:app_1/components/Home/TopResults/home_top_results_container.dart';
@@ -24,10 +25,10 @@ class _HomeContentContainerState extends State<HomeContentContainer> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 370),
-      padding: const EdgeInsets.only(top: 56),
+      padding: const EdgeInsets.only(top: 46),
       decoration: const ShapeDecoration(
         shape: SwTicketBorder(
-            radius: 40,
+            radius: 30,
             fillColor: Colors.white,
             topLeft: true,
             topRight: true,
@@ -40,6 +41,7 @@ class _HomeContentContainerState extends State<HomeContentContainer> {
           HomeCategoryContainer(),
           HomeTopResultsContainer(),
           HomeCountriesContainer(),
+          ContributeCard(),
           HomePlacesContainer()
         ],
       ),

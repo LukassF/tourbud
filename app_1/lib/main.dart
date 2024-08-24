@@ -28,8 +28,8 @@ class _MyAppState extends State<MyApp> {
           scaffoldBackgroundColor: Colors.white,
           colorScheme: ColorScheme.fromSeed(
               seedColor: Colors.white,
-              primary: const Color.fromARGB(255, 0, 179, 255),
-              secondary: const Color.fromARGB(255, 255, 82, 131),
+              primary: Color(0xFF5F6FFD),
+              secondary: Color.fromARGB(255, 6, 8, 173),
               secondaryContainer: const Color.fromARGB(255, 187, 187, 187),
               tertiary: const Color.fromARGB(255, 120, 118, 118),
               tertiaryContainer: const Color.fromARGB(255, 245, 245, 245)),

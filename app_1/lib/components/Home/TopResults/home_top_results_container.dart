@@ -16,11 +16,78 @@ class _HomeTopResultsContainerState extends State<HomeTopResultsContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 260,
-      padding: EdgeInsets.only(top: 20),
+      height: 305,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          Container(
+            height: 40,
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RippleWrapper(
+                      customOpacity: 0.5,
+                      padding: EdgeInsets.all(8.0),
+                      onPressed: () {
+                        showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(40.0))),
+                            context: context,
+                            builder: (ctx) => Container(
+                                  height: 350,
+                                ));
+                      },
+                      child: Row(children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 5),
+                          child: SvgPicture.asset(
+                            'assets/icons/filter.svg',
+                            width: 13,
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.primary,
+                                BlendMode.srcIn),
+                          ),
+                        ),
+                        Text(
+                          'Filter results',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 13),
+                        )
+                      ]),
+                    ),
+                    RippleWrapper(
+                      customOpacity: 0.5,
+                      padding: EdgeInsets.all(8.0),
+                      onPressed: () {},
+                      child: Row(children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 5),
+                          child: SvgPicture.asset(
+                            'assets/icons/sort.svg',
+                            width: 18,
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.primary,
+                                BlendMode.srcIn),
+                          ),
+                        ),
+                        Text(
+                          'Sort results',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontSize: 13),
+                        )
+                      ]),
+                    )
+                  ]),
+            ),
+          ),
           Expanded(
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -57,73 +124,6 @@ class _HomeTopResultsContainerState extends State<HomeTopResultsContainer> {
               ],
             ),
           ),
-          SizedBox(
-            height: 50,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    RippleWrapper(
-                      customOpacity: 0.5,
-                      padding: EdgeInsets.all(8.0),
-                      onPressed: () {
-                        showModalBottomSheet(
-                            isScrollControlled: true,
-                            backgroundColor: Colors.white,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(40.0))),
-                            context: context,
-                            builder: (ctx) => Container(
-                                  height: 350,
-                                ));
-                      },
-                      child: Row(children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 5),
-                          child: SvgPicture.asset(
-                            'assets/icons/filter.svg',
-                            width: 13,
-                            colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.secondary,
-                                BlendMode.srcIn),
-                          ),
-                        ),
-                        Text(
-                          'Filter results',
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontSize: 13),
-                        )
-                      ]),
-                    ),
-                    RippleWrapper(
-                      customOpacity: 0.5,
-                      padding: EdgeInsets.all(8.0),
-                      onPressed: () {},
-                      child: Row(children: [
-                        Container(
-                          margin: EdgeInsets.only(right: 5),
-                          child: SvgPicture.asset(
-                            'assets/icons/sort.svg',
-                            width: 18,
-                            colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.secondary,
-                                BlendMode.srcIn),
-                          ),
-                        ),
-                        Text(
-                          'Sort results',
-                          style: TextStyle(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontSize: 13),
-                        )
-                      ]),
-                    )
-                  ]),
-            ),
-          )
         ],
       ),
     );

@@ -1,5 +1,4 @@
 import 'package:app_1/classes/home/constants.dart';
-import 'package:app_1/classes/home/utils.dart';
 import 'package:app_1/components/BottomAppBar/bottom_appbar_item.dart';
 import 'package:app_1/state/app_controller.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +16,7 @@ class _BottomBarState extends State<BottomBar> {
     return BottomAppBar(
       padding: const EdgeInsets.all(0),
       child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          // boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.black.withOpacity(0.1),
-          //     blurRadius: 10.0,
-          //     spreadRadius: -5,
-          //     offset: const Offset(0.0, -5.0),
-          //   )
-          // ],
-        ),
+        color: Colors.white,
         height: 60,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -60,18 +49,23 @@ class _BottomBarState extends State<BottomBar> {
                       height: 10,
                       child: Stack(
                         children: [
-                          AnimatedPositioned(
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.decelerate,
-                            left: HomeUtils.indicatorPosition(snapshot.data),
-                            child: ClipOval(
-                              child: Container(
-                                height: 5,
-                                width: 5,
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
-                          )
+                          StreamBuilder<double>(
+                              stream: appController.tabIndicatorPositionStream,
+                              builder: (context, indicatorSnapshot) {
+                                return AnimatedPositioned(
+                                  duration: const Duration(milliseconds: 200),
+                                  curve: Curves.decelerate,
+                                  left: indicatorSnapshot.data,
+                                  child: ClipOval(
+                                    child: Container(
+                                      height: 5,
+                                      width: 5,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                                  ),
+                                );
+                              })
                         ],
                       ),
                     ),

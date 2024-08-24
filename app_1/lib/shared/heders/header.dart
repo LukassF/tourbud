@@ -41,7 +41,7 @@ class _HeaderState extends State<Header> {
             stream: homeController.scrollDistanceStream,
             builder: (context, snapshot) {
               double radius = snapshot.data != null && snapshot.data! < 350
-                  ? min((snapshot.data ?? 0) / 8.6, 40)
+                  ? min((snapshot.data ?? 0) / 11.6, 30)
                   : 0;
               double opacity = min((snapshot.data ?? 0) / 350, 1);
 
@@ -51,15 +51,6 @@ class _HeaderState extends State<Header> {
                       bottomLeft: Radius.circular(radius),
                       bottomRight: Radius.circular(radius)),
                   color: Colors.white.withOpacity(opacity),
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.black
-                  //         .withOpacity(min((snapshot.data ?? 0) / 450, 0.1)),
-                  //     blurRadius: 10.0,
-                  //     spreadRadius: -5,
-                  //     offset: const Offset(0.0, 6.0),
-                  //   )
-                  // ],
                 ),
                 child: StreamBuilder<bool>(
                     stream: homeController.isSearchOpenStream,

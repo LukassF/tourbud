@@ -11,9 +11,9 @@ class HomeTopContainerBackground extends StatelessWidget {
         stream: homeController.scrollDistanceStream.distinct(),
         builder: (context, snapshot) {
           return Positioned(
-            top: snapshot.data != null && snapshot.data! < 100
+            top: snapshot.data != null && snapshot.data! < 150
                 ? -snapshot.data!
-                : -100 - (((snapshot.data ?? 0) - 100) / 2.5),
+                : -150 - (((snapshot.data ?? 0) - 150) / 2.5),
             height: 420,
             width: MediaQuery.sizeOf(context).width,
             child: Stack(

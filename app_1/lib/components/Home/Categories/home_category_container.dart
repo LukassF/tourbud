@@ -18,7 +18,7 @@ class _HomeCategoryContainerState extends State<HomeCategoryContainer> {
         stream: homeController.activeCategoryStream,
         builder: (context, snapshot) {
           return SizedBox(
-            height: 60,
+            height: 50,
             child: NotificationListener<ScrollNotification>(
               onNotification: (scrollNotification) {
                 homeController.updateCategoryListScrollDistance(
@@ -52,18 +52,19 @@ class _HomeCategoryContainerState extends State<HomeCategoryContainer> {
                           return AnimatedPositioned(
                               duration: const Duration(milliseconds: 200),
                               curve: Curves.decelerate,
-                              bottom: 4,
+                              bottom: 5,
                               left: indicatorSnapshot.data?.left ?? 0,
                               child: AnimatedSize(
                                 duration: const Duration(milliseconds: 200),
-                                curve: Curves.decelerate,
                                 child: Container(
                                   width: indicatorSnapshot.data?.width ?? 0,
-                                  height: 2,
+                                  height: 40,
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .primary
+                                        .withOpacity(0.1),
                                   ),
                                 ),
                               ));

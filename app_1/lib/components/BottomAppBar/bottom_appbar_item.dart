@@ -1,3 +1,4 @@
+import 'package:app_1/state/app_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,9 +19,23 @@ class BottomAppBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final key = GlobalKey();
+
     return InkWell(
-      onTap: onClick,
+      onTap: () {
+        onClick();
+        BuildContext? context = key.currentContext;
+        if (context != null) {
+          RenderBox box = context.findRenderObject() as RenderBox;
+          Offset position = box.localToGlobal(Offset.zero);
+          double left = position.dx + 20;
+          print(left);
+
+          appController.updateTabIndicatorPosition(left);
+        }
+      },
       child: Container(
+        key: key,
         width: 60,
         margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
         child:

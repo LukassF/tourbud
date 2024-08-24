@@ -24,7 +24,7 @@ class _HomeCountriesContainerState extends State<HomeCountriesContainer> {
                 padding: const EdgeInsets.only(left: 16.0),
                 child: const Text(
                   'Top countries',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
               Expanded(
@@ -53,8 +53,8 @@ class _HomeCountriesContainerState extends State<HomeCountriesContainer> {
                   image: 'assets/images/spain.webp',
                   onPress: () {}),
               CountryCard(
-                label: 'Switzerland',
-                image: 'assets/images/switzerland.jpg',
+                label: 'Mexico',
+                image: 'assets/images/mexico.png',
                 onPress: () {},
                 isLast: true,
               ),
